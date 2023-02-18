@@ -1,0 +1,1674 @@
+--Tabla Provincia
+-----------------------
+--Insert
+--No se puede insertar más datos a esta tabla, por la razón que se tiene establecido actualmente que el
+Ecuador tiene 24 provincias.
+-----------------------
+
+-----------------------
+--select
+CREATE OR REPLACE PROCEDURE "SpSelectProvincia"("IdProvincia" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorProvincia", "VarNombreProvincia", "VarEstadoProvincia" from "TblProvincia"
+	where "VarIdentificadorProvincia" = "IdProvincia"
+	order by "VarIdentificadorProvincia";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorProvincia" format a37;
+col "VarNombreProvincia" format a20;
+col "VarEstadoProvincia" format a20;
+Exec "SpSelectProvincia"('5d69eeee-74f7-11ed-8d69-0242ac1c000c');
+-------------------------
+-------------------------
+--Update
+CREATE OR REPLACE PROCEDURE "SpUpdateProvincia"("IdProvincia" in varchar2, "EstadoProvincia" in varchar2)
+AS
+Begin
+	UPDATE "TblProvincia"
+	SET "VarEstadoProvincia"="EstadoProvincia"
+	WHERE "VarIdentificadorProvincia" = "IdProvincia";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateProvincia"('5d69eeee-74f7-11ed-8d69-0242ac1c000c','Inactivo');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorProvincia" format a37;
+col "VarNombreProvincia" format a20;
+col "VarEstadoProvincia" format a20;
+select "VarIdentificadorProvincia", "VarNombreProvincia", "VarEstadoProvincia" from "TblProvincia" 
+where "VarIdentificadorProvincia" = '5d69eeee-74f7-11ed-8d69-0242ac1c000c';
+-------------------------
+
+--Tabla Canton
+-----------------------
+--Insert
+--No se puede insertar más datos a esta tabla, por la razón que se tiene establecido actualmente que el
+Ecuador tiene 221 cantones.
+-----------------------
+
+-----------------------
+--select
+CREATE OR REPLACE PROCEDURE "SpSelectCanton"("IdCanton" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorCanton", "VarNombreCanton", "VarEstadoCanton", "VarIdentificadorProvincia" from "TblCanton"
+	where "VarIdentificadorCanton" = "IdCanton"
+	order by "VarIdentificadorCanton";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorCanton" format a37;
+col "VarNombreCanton" format a20;
+col "VarEstadoCanton" format a20;
+col "VarIdentificadorProvincia" format a37;
+Exec "SpSelectCanton"('8c050784-74f7-11ed-884d-0242ac1c000c');
+-------------------------
+-------------------------
+--Update
+CREATE OR REPLACE PROCEDURE "SpUpdateCanton"("IdCanton" in varchar2, "EstadoCanton" in varchar2)
+AS
+Begin
+	UPDATE "TblCanton"
+	SET "VarEstadoCanton"="EstadoCanton"
+	WHERE "VarIdentificadorCanton" = "IdCanton";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateCanton"('8c050784-74f7-11ed-884d-0242ac1c000c','Activo');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorCanton" format a37;
+col "VarNombreCanton" format a20;
+col "VarEstadoCanton" format a20;
+col "VarIdentificadorProvincia" format a37;
+select "VarIdentificadorCanton", "VarNombreCanton", "VarEstadoCanton", "VarIdentificadorProvincia" from "TblCanton" 
+where "VarIdentificadorCanton" = '8c050784-74f7-11ed-884d-0242ac1c000c';
+-------------------------
+
+--Tabla Permisos
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertPermisos"("IdPermisos" in varchar2, "TipoPermisos" in varchar2, "EstadoPermisos" in varchar2, "DescripcionPermisos" in varchar2)
+AS
+Begin
+	insert into "TblPermisos"("VarIdentificadorPermisos", "VarTipoPermisos", "VarEstadoPermisos", "VarDescripcionPermisos")
+	values("IdPermisos","TipoPermisos","EstadoPermisos","DescripcionPermisos");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertPermisos"('1','OtroPermiso','Inactivo','sadwdadsasdasdsadasda');
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorPermisos" format a37;
+col "VarTipoPermisos" format a20;
+col "VarEstadoPermisos" format a20;
+col "VarDescripcionPermisos" format a50;
+select "VarIdentificadorPermisos", "VarTipoPermisos", "VarEstadoPermisos", "VarDescripcionPermisos" from "TblPermisos";
+-----------------------
+
+-----------------------
+--select
+CREATE OR REPLACE PROCEDURE "SpSelectPermisos"("IdPermisos" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorPermisos", "VarTipoPermisos", "VarEstadoPermisos", "VarDescripcionPermisos" from "TblPermisos"
+	where "VarIdentificadorPermisos" = "IdPermisos"
+	order by "VarIdentificadorPermisos";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorPermisos" format a37;
+col "VarTipoPermisos" format a20;
+col "VarEstadoPermisos" format a20;
+col "VarDescripcionPermisos" format a33;
+Exec "SpSelectPermisos"('e10e7e7a-74f4-11ed-ba23-0242ac1c000c');
+-------------------------
+-------------------------
+--Update
+CREATE OR REPLACE PROCEDURE "SpUpdatePermisos"("IdPermisos" in varchar2, "TipoPermisos" in varchar2, "EstadoPermisos" in varchar2, "DescripcionPermisos" in varchar2)
+AS
+Begin
+	UPDATE "TblPermisos"
+	SET "VarTipoPermisos"="TipoPermisos", "VarEstadoPermisos"="EstadoPermisos", "VarDescripcionPermisos"="DescripcionPermisos"
+	WHERE "VarIdentificadorPermisos" = "IdPermisos";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdatePermisos"('e10e7e7a-74f4-11ed-ba23-0242ac1c000c','Crear','Activo','Tiene una nueva descripcion modificada');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorPermisos" format a37;
+col "VarTipoPermisos" format a20;
+col "VarEstadoPermisos" format a20;
+col "VarDescripcionPermisos" format a40;
+select "VarIdentificadorPermisos", "VarTipoPermisos", "VarEstadoPermisos", "VarDescripcionPermisos" from "TblPermisos" 
+where "VarIdentificadorPermisos" = 'e10e7e7a-74f4-11ed-ba23-0242ac1c000c';
+-------------------------
+
+--Tabla Rol
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertRol"("IdRol" in varchar2, "TipoRol" in varchar2, "EstadoRol" in varchar2, "DescripcionRol" in varchar2)
+AS
+Begin
+	insert into "TblRol"("VarIdentificadorRol", "VarTipoRol", "VarEstadoRol", "VarDescripcionRol")
+	values("IdRol","TipoRol","EstadoRol","DescripcionRol");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertRol"('1','OtroRol','Inactivo','sadwdadsasdasdsadasda');
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorRol" format a37;
+col "VarTipoRol" format a20;
+col "VarEstadoRol" format a20;
+col "VarDescripcionRol" format a50;
+select "VarIdentificadorRol", "VarTipoRol", "VarEstadoRol", "VarDescripcionRol" from "TblRol";
+-----------------------
+
+-----------------------
+--select
+CREATE OR REPLACE PROCEDURE "SpSelectRol"("IdRol" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorRol", "VarTipoRol", "VarEstadoRol", "VarDescripcionRol" from "TblRol"
+	where "VarIdentificadorRol" = "IdRol"
+	order by "VarIdentificadorRol";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorRol" format a37;
+col "VarTipoRol" format a20;
+col "VarEstadoRol" format a20;
+col "VarDescripcionRol" format a50;
+Exec "SpSelectRol"('e28f4638-74f6-11ed-a001-0242ac1c000c');
+-------------------------
+-------------------------
+--Update
+CREATE OR REPLACE PROCEDURE "SpUpdateRol"("IdRol" in varchar2, "TipoRol" in varchar2, "EstadoRol" in varchar2, "DescripcionRol" in varchar2)
+AS
+Begin
+	UPDATE "TblRol"
+	SET "VarTipoRol"="TipoRol", "VarEstadoRol"="EstadoRol", "VarDescripcionRol"="DescripcionRol"
+	WHERE "VarIdentificadorRol" = "IdRol";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateRol"('e28f4638-74f6-11ed-a001-0242ac1c000c','Administrador/a','Activo','Tiene una nueva descripcion modificada');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorRol" format a37;
+col "VarTipoRol" format a20;
+col "VarEstadoRol" format a20;
+col "VarDescripcionRol" format a50;
+select "VarIdentificadorRol", "VarTipoRol", "VarEstadoRol", "VarDescripcionRol" from "TblRol" 
+where "VarIdentificadorRol" = 'e28f4638-74f6-11ed-a001-0242ac1c000c';
+-------------------------
+
+--Tabla Examen
+-----------------------
+--Insert
+--Para la tabla examen, no se puede insertar datos porque son datos que el sistema de educación que
+toma el examen a los aspirantes son los encargados de almacenar esos datos, nuestro sistema
+solamente cargara las notas juntos con sus demás campos de datos.
+-----------------------
+
+-----------------------
+--select
+CREATE OR REPLACE PROCEDURE "SpSelectExamen"("IdExamen" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorExamen", "DtFechaExamen", "VarEstadoExamen", "VarNotaExamen" from "TblExamen"
+	where "VarIdentificadorExamen" = "IdExamen"
+	order by "VarIdentificadorExamen";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorExamen" format a37;
+col "DtFechaExamen" format a15;
+col "VarEstadoExamen" format a18;
+col "VarNotaExamen" format a15;
+Exec "SpSelectExamen"('8c27fbe8-74f4-11ed-9ddf-0242ac1c000c');
+-------------------------
+-------------------------
+--Update
+CREATE OR REPLACE PROCEDURE "SpUpdateExamen"("IdExamen" in varchar2, "EstadoExamen" in varchar2)
+AS
+Begin
+	UPDATE "TblExamen"
+	SET "VarEstadoExamen"="EstadoExamen"
+	WHERE "VarIdentificadorExamen" = "IdExamen";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateExamen"('8c27fbe8-74f4-11ed-9ddf-0242ac1c000c','Activo');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorExamen" format a37;
+col "DtFechaExamen" format a15;
+col "VarEstadoExamen" format a18;
+col "VarNotaExamen" format a15;
+select "VarIdentificadorExamen", "DtFechaExamen", "VarEstadoExamen", "VarNotaExamen" from "TblExamen" 
+where "VarIdentificadorExamen" = '8c27fbe8-74f4-11ed-9ddf-0242ac1c000c';
+-------------------------
+
+--Tabla Usuario
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertUsuario"("IdUsuario" in varchar2, "NombresUsuario" in varchar2, "ApellidosUsuario" in varchar2, "CorreoUsuario" in varchar2, "EstadoUsuario" in varchar2, "ContraseniaUsuario" in varchar2, "NicknameUsuario" in varchar2, "GeneroUsuario" in varchar2, "TelefonoUsuario" in number)
+AS
+Begin
+	insert into "TblUsuario"("VarIdentificadorUsuario", "VarNombresUsuario", "VarApellidosUsuario", "VarCorreoUsuario", "VarEstadoUsuario", "VarContraseniaUsuario", "VarNicknameUsuario", "VarGeneroUsuario", "NbrTelefonoUsuario")
+	values("IdUsuario", "NombresUsuario", "ApellidosUsuario", "CorreoUsuario", "EstadoUsuario", "ContraseniaUsuario", "NicknameUsuario", "GeneroUsuario", "TelefonoUsuario");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertUsuario"('1','Jhon','Trabolta','wew@gmail.com','Activo', 'asdas12das', 'Jhon231', 'M', 09999999991);
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorUsuario" format a37;
+col "VarNombresUsuario" format a20;
+col "VarApellidosUsuario" format a20;
+col "VarCorreoUsuario" format a30;
+col "VarEstadoUsuario" format a20;
+col "VarContraseniaUsuario" format a20;
+col "VarNicknameUsuario" format a20;
+col "VarGeneroUsuario" format a15;
+col "NbrTelefonoUsuario" format 9999999999;
+select "VarIdentificadorUsuario", "VarNombresUsuario", "VarApellidosUsuario", "VarCorreoUsuario", "VarEstadoUsuario", "VarContraseniaUsuario", "VarNicknameUsuario", "VarGeneroUsuario", "NbrTelefonoUsuario" from "TblUsuario";
+-----------------------
+
+-----------------------
+--select
+CREATE OR REPLACE PROCEDURE "SpSelectUsuario"("IdUsuario" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorUsuario", "VarNombresUsuario", "VarApellidosUsuario", "VarCorreoUsuario", "VarEstadoUsuario", "VarContraseniaUsuario", "VarNicknameUsuario", "VarGeneroUsuario", "NbrTelefonoUsuario" from "TblUsuario"
+	where "VarIdentificadorUsuario" = "IdUsuario"
+	order by "VarIdentificadorUsuario";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorUsuario" format a37;
+col "VarNombresUsuario" format a20;
+col "VarApellidosUsuario" format a20;
+col "VarCorreoUsuario" format a30;
+col "VarEstadoUsuario" format a20;
+col "VarContraseniaUsuario" format a20;
+col "VarNicknameUsuario" format a20;
+col "VarGeneroUsuario" format a15;
+col "NbrTelefonoUsuario" format 9999999999;
+Exec "SpSelectUsuario"('a69f5700-74f4-11ed-8c78-0242ac1c000c');
+-------------------------
+-------------------------
+--Update
+CREATE OR REPLACE PROCEDURE "SpUpdateUsuario"("IdUsuario" in varchar2, "CorreoUsuario" in varchar2, "EstadoUsuario" in varchar2, "ContraseniaUsuario" in varchar2, "NicknameUsuario" in varchar2, "GeneroUsuario" in varchar2, "TelefonoUsuario" in number)
+AS
+Begin
+	UPDATE "TblUsuario"
+	SET "VarCorreoUsuario"="CorreoUsuario", "VarEstadoUsuario"="EstadoUsuario", "VarContraseniaUsuario"="ContraseniaUsuario", "VarNicknameUsuario"="NicknameUsuario", "VarGeneroUsuario"="GeneroUsuario", "NbrTelefonoUsuario"="TelefonoUsuario"
+	WHERE "VarIdentificadorUsuario" = "IdUsuario";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateUsuario"('a69f5700-74f4-11ed-8c78-0242ac1c000c','bonifacio.andreu@hotmail.com','Activo','esw4+sd','bonifacio233','M',0999999991);
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorUsuario" format a37;
+col "VarNombresUsuario" format a20;
+col "VarApellidosUsuario" format a20;
+col "VarCorreoUsuario" format a30;
+col "VarEstadoUsuario" format a20;
+col "VarContraseniaUsuario" format a20;
+col "VarNicknameUsuario" format a20;
+col "VarGeneroUsuario" format a15;
+col "NbrTelefonoUsuario" format 999999999;
+select "VarIdentificadorUsuario", "VarNombresUsuario", "VarApellidosUsuario", "VarCorreoUsuario", "VarEstadoUsuario", "VarContraseniaUsuario", "VarNicknameUsuario", "VarGeneroUsuario", "NbrTelefonoUsuario" from "TblUsuario" 
+where "VarIdentificadorUsuario" = 'a69f5700-74f4-11ed-8c78-0242ac1c000c';
+-------------------------
+
+--Tabla Usuario
+-----------------------
+--Insert
+--No se puede hacer insert de los datos, porque son carreras que tienen las instituciones educativas, lo
+cual nuestro sistema no se encarga de esa administración, lo cual solo cargamos los datos de las
+carreras que proporcionan las distintas instituciones de educación superior.
+-----------------------
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectCarreras"("IdCarreras" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorCarreras", "VarNombreCarreras", "VarDescripcionCarreras", "VarEstadoCarreras", "DtFechaVigenciaCarreras", "VarModalidadCarreras", "VarJornadaCarreras" from "TblCarreras"
+	where "VarIdentificadorCarreras" = "IdCarreras"
+	order by "VarIdentificadorCarreras";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorCarreras" format a37;
+col "VarNombreCarreras" format a70;
+col "VarDescripcionCarreras" format a50;
+col "VarEstadoCarreras" format a20;
+col "DtFechaVigenciaCarreras" format a20;
+col "VarModalidadCarreras" format a20;
+col "VarJornadaCarreras" format a20;
+Exec "SpSelectCarreras"('30f81c1c-74f4-11ed-9ec6-0242ac1c000c');
+-------------------------
+-------------------------
+--Update
+create or replace PROCEDURE "SpUpdateCarreras"("IdCarreras" in varchar2, "EstadoCarreras" in varchar2)
+AS
+Begin
+	UPDATE "TblCarreras"
+	SET "VarEstadoCarreras"="EstadoCarreras"
+	WHERE "VarIdentificadorCarreras" = "IdCarreras";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateCarreras"('30f81c1c-74f4-11ed-9ec6-0242ac1c000c','Activo');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorCarreras" format a37;
+col "VarNombreCarreras" format a70;
+col "VarDescripcionCarreras" format a50;
+col "VarEstadoCarreras" format a20;
+col "DtFechaVigenciaCarreras" format a20;
+col "VarModalidadCarreras" format a20;
+col "VarJornadaCarreras" format a20;
+select "VarIdentificadorCarreras", "VarNombreCarreras", "VarDescripcionCarreras", "VarEstadoCarreras", "DtFechaVigenciaCarreras", "VarModalidadCarreras", "VarJornadaCarreras" from "TblCarreras" 
+where "VarIdentificadorCarreras" = '30f81c1c-74f4-11ed-9ec6-0242ac1c000c';
+-------------------------
+
+--Tabla Parroquia
+-----------------------
+--Insert
+--No se puede hacer insert de los datos, porque son parroquias que maneja el Ecuador actualmente, y
+no corresponde a la administración de nuestro sistema.
+-----------------------
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectParroquia"("IdParroquia" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorParroquia", "VarNombreParroquia", "VarEstadoParroquia", "VarIdentificadorProvincia", "VarIdentificadorCanton" From "TblParroquia"
+	where "VarIdentificadorParroquia" = "IdParroquia"
+	order by "VarIdentificadorParroquia";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorParroquia" format a37;
+col "VarNombreParroquia" format a25;
+col "VarEstadoParroquia" format a20;
+col "VarIdentificadorProvincia" format a37;
+col "VarIdentificadorCanton" format a37;
+Exec "SpSelectParroquia"('359d8b5a-74f7-11ed-a487-0242ac1c000c');
+-------------------------
+-------------------------
+--Update
+create or replace PROCEDURE "SpUpdateParroquia"("IdParroquia" in varchar2, "EstadoParroquia" in varchar2)
+AS
+Begin
+	UPDATE "TblParroquia"
+	SET "VarEstadoParroquia"="EstadoParroquia"
+	WHERE "VarIdentificadorParroquia" = "IdParroquia";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateParroquia"('359d8b5a-74f7-11ed-a487-0242ac1c000c','Inactivo');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorParroquia" format a37;
+col "VarNombreParroquia" format a25;
+col "VarEstadoParroquia" format a20;
+col "VarIdentificadorProvincia" format a37;
+col "VarIdentificadorCanton" format a37;
+select "VarIdentificadorParroquia", "VarNombreParroquia", "VarEstadoParroquia", "VarIdentificadorProvincia", "VarIdentificadorCanton" from "TblParroquia" 
+where "VarIdentificadorParroquia" = '359d8b5a-74f7-11ed-a487-0242ac1c000c';
+-------------------------
+
+
+--Tabla Institucion Educativa
+-----------------------
+--Insert
+--No se puede hacer insert de los datos, porque son instituciones educativas de educación superior
+que maneja el Ecuador actualmente, y no corresponde a la administración de nuestro sistema.
+-----------------------
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectInstitucionEducativa"("IdInstitucionEducativa" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorInstitucionEducativa", "VarNombreInstitucionEducativa", "VarCorreoInstitucionEducativa", "NbrTelefonoInstitucionEducativa","VarDescripcionInstitucionEducativa", "VarEstadoInstitucionEducativa", "VarTipoInstitucionEducativa" From "TblInstitucionEducativa"
+	where "VarIdentificadorInstitucionEducativa" = "IdInstitucionEducativa"
+	order by "VarIdentificadorInstitucionEducativa";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorInstitucionEducativa" format a37;
+col "VarNombreInstitucionEducativa" format a40;
+col "VarCorreoInstitucionEducativa" format a30;
+col "NbrTelefonoInstitucionEducativa" format 999999999;
+col "VarDescripcionInstitucionEducativa" format a150;
+col "VarEstadoInstitucionEducativa" format a20;
+col "VarTipoInstitucionEducativa" format a20;
+Exec "SpSelectInstitucionEducativa"('4a0f62d2-74f4-11ed-be5f-0242ac1c000c');
+-------------------------
+-------------------------
+--Update
+create or replace PROCEDURE "SpUpdateInstitucionEducativa"("IdInstitucionEducativa" in varchar2, "EstadoInstitucionEducativa" in varchar2)
+AS
+Begin
+	UPDATE "TblInstitucionEducativa"
+	SET "VarEstadoInstitucionEducativa"="EstadoInstitucionEducativa"
+	WHERE "VarIdentificadorInstitucionEducativa" = "IdInstitucionEducativa";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateInstitucionEducativa"('4a0f62d2-74f4-11ed-be5f-0242ac1c000c','Activo');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorInstitucionEducativa" format a37;
+col "VarNombreInstitucionEducativa" format a40;
+col "VarCorreoInstitucionEducativa" format a30;
+col "NbrTelefonoInstitucionEducativa" format 999999999;
+col "VarDescripcionInstitucionEducativa" format a150;
+col "VarEstadoInstitucionEducativa" format a20;
+col "VarTipoInstitucionEducativa" format a20;
+select "VarIdentificadorInstitucionEducativa", "VarNombreInstitucionEducativa", "VarCorreoInstitucionEducativa", "NbrTelefonoInstitucionEducativa","VarDescripcionInstitucionEducativa", "VarEstadoInstitucionEducativa", "VarTipoInstitucionEducativa" from "TblInstitucionEducativa" 
+where "VarIdentificadorInstitucionEducativa" = '4a0f62d2-74f4-11ed-be5f-0242ac1c000c';
+
+drop procedure "PrUpdateInstitucionEducativa";
+-------------------------
+--Tabla CarrerasSedes
+-----------------------
+--Insert
+--No se puede hacer insert de los datos, porque son carreras que manejan las distintas educaciones educativas, y el sistema no reemplaza esta función.
+-----------------------
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectCarrerasSedes"("IdCarrerasSedes" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorCarrerasSedes", "VarIdentificadorInstitucionEducativa","VarIdentificadorCarreras","VarIdentificadorSedes","VarIdentificadorParroquia","VarIdentificadorCanton","VarIdentificadorProvincia"  From "TblCarrerasSedes"
+	where "VarIdentificadorCarrerasSedes" = "IdCarrerasSedes"
+	order by "VarIdentificadorCarrerasSedes";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorCarrerasSedes" format a50;
+col "VarIdentificadorInstitucionEducativa" format a50;
+col "VarIdentificadorCarreras" format a50;
+col "VarIdentificadorSedes" format a50;
+col "VarIdentificadorParroquia" format a50;
+col "VarIdentificadorCanton" format a50;
+col "VarIdentificadorProvincia" format a50;
+Exec "SpSelectCarrerasSedes"('5ed872fc-74f5-11ed-8600-0242ac1c000c');
+-------------------------
+--update
+Los atributos no se podrán modificar porque son propias del Ecuador que han pasado por un proceso de verificación cosas que no son importantes en nuestro sistema, ya que hacemos solo la carga de esas instituciones para lograr el objetivo principal de nuestro software. 
+--delete
+No es posible hacer una eliminación de los datos, porque podría llevar a tener problemas en el sistema, además que se necesita tener un historial de la tabla, para esto se maneja el estado de las instituciones educativas.
+
+--Tabla Postular
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertPostular"("IdPostular" in varchar2,"Estado" in varchar2,"Puntaje" in varchar2, "IdExamen" in varchar2, "IdCarreras" in varchar2,"IdUsuario" in varchar2, "CedulaAspirante" in varchar2)
+AS
+Begin
+	insert into "TblPostular"("VarIdentificadorPostular", "VarEstadoPostular", "VarPuntajePostular", "VarIdentificadorExamen","VarIdentificadorCarreras","VarIdentificadorUsuario","VarCedulaAspirantes")
+	values("IdPostular","Estado","Puntaje","IdExamen","IdCarreras","IdUsuario","CedulaAspirante");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertPostular"('9743a0f2-74f6-11ed-a0be-0242ac1c000e','Activo','446','8c26b706-74f4-11ed-9ddf-0242ac1c000c','30f7b4ca-74f4-11ed-9ec6-0242ac1c000c','a69bb186-74f4-11ed-8c78-0242ac1c000c','1773488835');
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorPostular" format a37;
+col "VarEstadoPostular" format a20;
+col "VarPuntajePostular" format a20;
+col "VarIdentificadorExamen" format a50;
+col "VarIdentificadorCarreras" format a37;
+col "VarIdentificadorUsuario" format a20;
+col "VarCedulaAspirantes" format a20;
+
+select "VarIdentificadorPostular", "VarEstadoPostular", "VarPuntajePostular", "VarIdentificadorExamen","VarIdentificadorCarreras","VarIdentificadorUsuario","VarCedulaAspirantes" from "TblPostular"
+where "VarIdentificadorPostular" = '9743a0f2-74f6-11ed-a0be-0242ac1c000d' ;
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectPostular"("IdPostular" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorPostular", "VarEstadoPostular", "VarPuntajePostular", "VarIdentificadorExamen","VarIdentificadorCarreras","VarIdentificadorUsuario","VarCedulaAspirantes" from "TblPostular"
+	where "VarIdentificadorPostular" = "IdPostular"
+	order by "VarIdentificadorPostular";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorPostular" format a50;
+col "VarEstadoPostular" format a10;
+col "VarPuntajePostular" format 9999;
+col "VarIdentificadorExamen" format a50;
+col "VarIdentificadorCarreras" format a50;
+col "VarIdentificadorUsuario" format a50;
+col "VarCedulaAspirantes" format a10;
+Exec "SpSelectPostular"('97439e36-74f6-11ed-a0be-0242ac1c000c');
+-----------------------
+--update
+CREATE OR REPLACE PROCEDURE "SpUpdatePostular"("IdPostular" in varchar2, "Estado" in varchar2, "IdExamen" in varchar2, "IdCarreras" in varchar2,"IdUsuario" in varchar2,"CedulaAspirante" in varchar2)
+AS
+Begin
+	UPDATE "TblPostular"
+	SET "VarEstadoPostular"="Estado", "VarIdentificadorExamen"="IdExamen","VarIdentificadorCarreras"="IdCarreras", "VarIdentificadorUsuario"="IdUsuario", "VarCedulaAspirantes" = "CedulaAspirante","VarIdentificadorPostular"="IdPostular"
+	WHERE "VarIdentificadorPostular" = "IdPostular";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdatePostular"('Activo','8c26b7a6-74f4-11ed-9ddf-0242ac1c000c','30f7b632-74f4-11ed-9ec6-0242ac1c000c','a69bb29e-74f4-11ed-8c78-0242ac1c000c','1773488835','9743a0f2-74f6-11ed-a0be-0242ac1c000c');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorPostular" format a50;
+col "VarEstadoPostular" format a10;
+col "VarPuntajePostular" format 9999;
+col "VarIdentificadorExamen" format a50;
+col "VarIdentificadorCarreras" format a50;
+col "VarIdentificadorUsuario" format a50;
+col "VarCedulaAspirantes" format a10;
+
+select "VarIdentificadorPostular", "VarEstadoPostular", "VarPuntajePostular", "VarIdentificadorExamen","VarIdentificadorCarreras","VarIdentificadorUsuario","VarCedulaAspirantes" from "TblPostular" 
+where "VarIdentificadorPostular" = '9743a0f2-74f6-11ed-a0be-0242ac1c000c';
+
+--Tabla PostularParametros
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertPostularParametros"("IdPostular" in varchar2,"IdExamen" in varchar2, "IdCarreras" in varchar2,"IdUsuario" in varchar2,"CedulaAspirante" in varchar2,"IdParametros" in varchar2)
+AS
+Begin
+	insert into "TblPostularParametros"("VarIdentificadorPostular", "VarIdentificadorExamen", "VarIdentificadorCarreras", "VarIdentificadorUsuario","VarCedulaAspirantes","VarIdentificadorParametros")
+	values("IdPostular","IdExamen","IdCarreras","IdUsuario","CedulaAspirante","IdParametros");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertPostularParametros"('97439e36-74f6-11ed-a0be-0242ac1c000c','8c26b4f4-74f4-11ed-9ddf-0242ac1c000c','30f7ab38-74f4-11ed-9ec6-0242ac1c000c','a69bade4-74f4-11ed-8c78-0242ac1c000c','445006337','0ab7584e-74f7-11ed-86c4-0242ac1c000c');
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorPostular" format a50;
+col "VarIdentificadorExamen" format a50;
+col "VarIdentificadorCarreras" format a50;
+col "VarIdentificadorUsuario" format a50;
+col "VarCedulaAspirantes" format a50;
+col "VarIdentificadorParametros" format a50;
+
+select "VarIdentificadorPostular", "VarIdentificadorExamen", "VarIdentificadorCarreras", "VarIdentificadorUsuario","VarCedulaAspirantes","VarIdentificadorParametros" from "TblPostularParametros"
+where "VarIdentificadorPostular" = '97439e36-74f6-11ed-a0be-0242ac1c000c' ;
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectPostularParametros"("IdPostular" in varchar2,"IdExamen" in varchar2, "IdCarreras" in varchar2,"IdUsuario" in varchar2,"CedulaAspirante" in varchar2,"IdParametros" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorPostular", "VarIdentificadorExamen", "VarIdentificadorCarreras", "VarIdentificadorUsuario","VarCedulaAspirantes","VarIdentificadorParametros" from "TblPostularParametros"
+	where "VarIdentificadorPostular" = "IdPostular"
+	order by "VarIdentificadorPostular";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorPostular" format a50;
+col "VarIdentificadorExamen" format a50;
+col "VarIdentificadorCarreras" format a50;
+col "VarIdentificadorUsuario" format a50;
+col "VarCedulaAspirantes" format a50;
+col "VarIdentificadorParametros" format a50;
+
+Exec "SpSelectPostularParametros"('97439e36-74f6-11ed-a0be-0242ac1c000c');
+-----------------------
+--update
+CREATE OR REPLACE PROCEDURE "SpUpdatePostularParametros"("IdPostular" in varchar2,"IdExamen" in varchar2, "IdCarreras" in varchar2,"IdUsuario" in varchar2,"CedulaAspirante" in varchar2,"IdParametros" in varchar2)
+AS
+Begin
+	UPDATE "TblPostularParametros"
+	SET  "VarIdentificadorExamen" = "IdExamen", "VarIdentificadorCarreras" = "IdCarreras", "VarIdentificadorUsuario" = "IdUsuario","VarCedulaAspirantes" = "CedulaAspirante","VarIdentificadorParametros" = "IdParametros","VarIdentificadorPostular" = "IdPostular"
+	WHERE "VarIdentificadorPostular" = "IdPostular";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdatePostularParametros"('9743a0f2-74f6-11ed-a0be-0242ac1c000c','8c26b706-74f4-11ed-9ddf-0242ac1c000c','30f7b4ca-74f4-11ed-9ec6-0242ac1c000c','a69bb186-74f4-11ed-8c78-0242ac1c000c','1773488835','0aaa5996-74f7-11ed-86c4-0242ac1c000c');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorPostular" format a50;
+col "VarIdentificadorExamen" format a50;
+col "VarIdentificadorCarreras" format a50;
+col "VarIdentificadorUsuario" format a50;
+col "VarCedulaAspirantes" format a50;
+col "VarIdentificadorParametros" format a50;
+
+select "VarIdentificadorPostular", "VarIdentificadorExamen", "VarIdentificadorCarreras", "VarIdentificadorUsuario","VarCedulaAspirantes","VarIdentificadorParametros" from "TblPostularParametros"
+where "VarIdentificadorPostular" = '9743a0f2-74f6-11ed-a0be-0242ac1c000c' ;
+
+--Tabla RolPermisos
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertRolPermisos"("IdRol" in varchar2,"IdPermisos" in varchar2)
+AS
+Begin
+	insert into "TblRolPermisos"("VarIdentificadorRol", "VarIdentificadorPermisos")
+	values("IdRol", "IdPermisos");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertRolPermisos"('e28f4638-74f6-11ed-a001-0242ac1c000c','1');
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 400;
+col "VarIdentificadorRol" format a50;
+col "VarIdentificadorPermisos" format a50;
+
+select "VarIdentificadorRol","VarIdentificadorPermisos" from "TblRolPermisos"
+where "VarIdentificadorRol" = 'e28f4638-74f6-11ed-a001-0242ac1c000c' ;
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectRolPermisos"("IdRol" in varchar2,"IdPermisos" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorRol","VarIdentificadorPermisos" from "TblRolPermisos"
+	where "VarIdentificadorRol" = "IdRol"
+	order by "VarIdentificadorRol";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorRol" format a50;
+col "VarIdentificadorPermisos" format a50;
+
+Exec "SpSelectRolPermisos"('e28f4638-74f6-11ed-a001-0242ac1c000c','e10e80a0-74f4-11ed-ba23-0242ac1c000c');
+-----------------------
+--update
+CREATE OR REPLACE PROCEDURE "SpUpdateRolPermisos"("IdRol" in varchar2,"IdPermisos" in varchar2)
+AS
+Begin
+	UPDATE "TblRolPermisos"
+	SET  "VarIdentificadorRol" = "IdRol", "VarIdentificadorPermisos" = "IdPermisos"
+	WHERE "VarIdentificadorRol" = "IdRol" and "VarIdentificadorPermisos" = "IdPermisos";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateRolPermisos"('e28f4638-74f6-11ed-a001-0242ac1c000c','e10e7e7a-74f4-11ed-ba23-0242ac1c000c');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+col "VarIdentificadorRol" format a50;
+col "VarIdentificadorPermisos" format a50;
+
+select "VarIdentificadorRol","VarIdentificadorPermisos" from "TblRolPermisos"
+where "VarIdentificadorRol" = 'e28f4638-74f6-11ed-a001-0242ac1c000c' ;
+
+--Tabla UsuarioRolPermisos
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertUsuarioRolPermisos"("IdUsuario" in varchar2,"IdRol" in varchar2,"IdPermisos" in varchar2)
+AS
+Begin
+	insert into "TblUsuarioRolPermisos"("VarIdentificadorUsuario", "VarIdentificadorRol", "VarIdentificadorPermisos")
+	values("IdUsuario", "IdRol", "IdPermisos");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertUsuarioRolPermisos"('a69bade4-74f4-11ed-8c78-0242ac1c000c','e28f4638-74f6-11ed-a001-0242ac1c000c','1');
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 400;
+
+col "VarIdentificadorUsuario" format a50;
+col "VarIdentificadorRol" format a50;
+col "VarIdentificadorPermisos" format a50;
+
+select "VarIdentificadorUsuario", "VarIdentificadorRol","VarIdentificadorPermisos" from "TblUsuarioRolPermisos"
+where "VarIdentificadorUsuario" = 'a69bade4-74f4-11ed-8c78-0242ac1c000c' ;
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectUsuarioRolPermisos"("IdUsuario" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorUsuario","VarIdentificadorRol","VarIdentificadorPermisos" from "TblUsuarioRolPermisos"
+	where "VarIdentificadorUsuario" = "IdUsuario"
+	order by "VarIdentificadorUsuario";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+
+col "VarIdentificadorUsuario" format a50;
+col "VarIdentificadorRol" format a50;
+col "VarIdentificadorPermisos" format a50;
+
+Exec "SpSelectUsuarioRolPermisos"('a69bade4-74f4-11ed-8c78-0242ac1c000c');
+-----------------------
+--update
+CREATE OR REPLACE PROCEDURE "SpUpdateUsuarioRolPermisos"("IdUsuario" in varchar2,"IdRol" in varchar2,"IdPermisos" in varchar2)
+AS
+Begin
+	UPDATE "TblUsuarioRolPermisos"
+	SET  "VarIdentificadorUsuario" = "IdUsuario", "VarIdentificadorRol" = "IdRol", "VarIdentificadorPermisos" = "IdPermisos"
+	WHERE "VarIdentificadorUsuario" = "IdUsuario" and "VarIdentificadorRol" = "IdRol" and "VarIdentificadorPermisos" = "IdPermisos";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateUsuarioRolPermisos"('a69bade4-74f4-11ed-8c78-0242ac1c000c','e28f4638-74f6-11ed-a001-0242ac1c000c','e10e7e7a-74f4-11ed-ba23-0242ac1c000c');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+
+col "VarIdentificadorUsuario" format a50;
+col "VarIdentificadorRol" format a50;
+col "VarIdentificadorPermisos" format a50;
+
+select "VarIdentificadorUsuario","VarIdentificadorRol","VarIdentificadorPermisos" from "TblUsuarioRolPermisos"
+where "VarIdentificadorUsuario" = 'a69bade4-74f4-11ed-8c78-0242ac1c000c' ;
+
+--Tabla Parametros
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertParametros"("IdParametros" in varchar2,"Accion1" in varchar2,"Accion2" in varchar2,"Accion3" in varchar2,"Accion4" in varchar2,"Accion5" in varchar2,"Cupos" in varchar2,"FechaCupos" in date, "Nota" in varchar2) 
+AS
+Begin
+	insert into "TblParametros"("VarIdentificadorParametros", "VarAccionAfirSocioecoParametros", "VarAccionAfirTerriParametros", "VarAccionAfirRuralParametros","VarAccionAfirVulneraParametros","VarAccionAfirPueblosNacionParametros","VarCuposOfertaCarParametros","DtCuposOfertaCarParametros","VarNotaReferCarParametros")
+	values("IdParametros", "Accion1", "Accion2", "Accion3", "Accion4", "Accion5","Cupos", "FechaCupos", "Nota");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertParametros"('0aaa5702-74f7-11ed-86c4-0242ac1c000D','VERDADERO','FALSO','FALSO','3','FALSO','50','4/10/2022','956');
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 400;
+
+col "VarIdentificadorParametros" format a50;
+col "VarAccionAfirSocioecoParametros" format a10; 
+col "VarAccionAfirTerriParametros" format a10; 
+col"VarAccionAfirRuralParametros" format a10;
+col "VarAccionAfirVulneraParametros" format a10;
+col "VarAccionAfirPueblosNacionParametros" format a10;
+col "VarCuposOfertaCarParametros" format 999;
+col "VarNotaReferCarParametros" format 999;
+
+select "VarIdentificadorParametros", "VarAccionAfirSocioecoParametros", "VarAccionAfirTerriParametros", "VarAccionAfirRuralParametros","VarAccionAfirVulneraParametros","VarAccionAfirPueblosNacionParametros","VarCuposOfertaCarParametros","DtCuposOfertaCarParametros","VarNotaReferCarParametros" from "TblParametros"
+where "VarIdentificadorParametros" = '0aaa5702-74f7-11ed-86c4-0242ac1c000D' ;
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectParametros"("IdParametros" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorParametros", "VarAccionAfirSocioecoParametros", "VarAccionAfirTerriParametros", "VarAccionAfirRuralParametros","VarAccionAfirVulneraParametros","VarAccionAfirPueblosNacionParametros","VarCuposOfertaCarParametros","DtCuposOfertaCarParametros","VarNotaReferCarParametros" from "TblParametros"
+	where "VarIdentificadorParametros" = "IdParametros"
+	order by "VarIdentificadorParametros";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+
+col "VarIdentificadorParametros" format a50;
+col "VarAccionAfirSocioecoParametros" format a10; 
+col "VarAccionAfirTerriParametros" format a10; 
+col"VarAccionAfirRuralParametros" format a10;
+col "VarAccionAfirVulneraParametros" format a10;
+col "VarAccionAfirPueblosNacionParametros" format a10;
+col "VarCuposOfertaCarParametros" format 999;
+col "VarNotaReferCarParametros" format 999;
+
+Exec "SpSelectParametros"('0aaa5702-74f7-11ed-86c4-0242ac1c000D');
+-----------------------
+--update
+CREATE OR REPLACE PROCEDURE "SpUpdateParametros"("IdParametros" in varchar2,"Accion1" in varchar2,"Accion2" in varchar2,"Accion3" in varchar2,"Accion4" in varchar2,"Accion5" in varchar2,"Cupos" in varchar2,"FechaCupos" in date, "Nota" in varchar2)
+AS
+Begin
+	UPDATE "TblParametros"
+	SET  "VarIdentificadorParametros" = "IdParametros", "VarAccionAfirSocioecoParametros" = "Accion1", "VarAccionAfirTerriParametros" = "Accion2", "VarAccionAfirRuralParametros" = "Accion3", "VarAccionAfirVulneraParametros" = "Accion4", "VarAccionAfirPueblosNacionParametros" = "Accion5","VarCuposOfertaCarParametros" = "Cupos","DtCuposOfertaCarParametros" = "FechaCupos", "VarNotaReferCarParametros" = "Nota"
+	WHERE "VarIdentificadorParametros" = "IdParametros";
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpUpdateParametros"('0aaa5702-74f7-11ed-86c4-0242ac1c000D','VERDADERO','FALSO','FALSO','3','FALSO','50','4/10/2022','956');
+--Visualizacion del dato donde se hizo el update
+set serveroutput on
+SET LINESIZE 300;
+
+col "VarIdentificadorParametros" format a50;
+col "VarAccionAfirSocioecoParametros" format a10; 
+col "VarAccionAfirTerriParametros" format a10; 
+col"VarAccionAfirRuralParametros" format a10;
+col "VarAccionAfirVulneraParametros" format a10;
+col "VarAccionAfirPueblosNacionParametros" format a10;
+col "VarCuposOfertaCarParametros" format 999;
+col "VarNotaReferCarParametros" format 999;
+
+select "VarIdentificadorParametros", "VarAccionAfirSocioecoParametros", "VarAccionAfirTerriParametros", "VarAccionAfirRuralParametros","VarAccionAfirVulneraParametros","VarAccionAfirPueblosNacionParametros","VarCuposOfertaCarParametros","DtCuposOfertaCarParametros","VarNotaReferCarParametros" from "TblParametros"
+where "VarIdentificadorParametros" = '0aaa5702-74f7-11ed-86c4-0242ac1c000D';
+
+--Tabla Aspirantes
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertAspirantes"("CedulaAspirante" in varchar2,"IdUsuario" in varchar2,"Nombres" in varchar2,"Apellidos" in varchar2,"Correo" in varchar2,"Genero" in varchar2,"Telefono" in number,"FechaNac" in date, "Edad" in number, "Estado" in varchar2, "EstadoGratui" in varchar2, "EstadoCivil" in varchar2) 
+AS
+Begin
+	insert into "TblAspirantes"("VarCedulaAspirantes","VarIdentificadorUsuario","VarNombresAspirantes", "VarApellidosAspirantes", "VarCorreoAspirantes", "VarGeneroAspirantes", "NbrTelefonoAspirantes", "DtFechaNacimientoAspirantes", "NbrEdadAspirantes", "VarEstadoAspirantes", "VarEstadoGratuidadAspirantes", "VarEstadoCivilAspirantes")
+	values("CedulaAspirante","IdUsuario","Nombres","Apellidos" ,"Correo","Genero","Telefono","FechaNac", "Edad", "Estado", "EstadoGratui", "EstadoCivil");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertAspirantes"('445006338','a69bb9ec-74f4-11ed-8c78-0242ac1c000c','Inocencio Aristides','Pujol Pedro','inocencio.pujol@hotmail.com','M',935838973,'19/8/1985',37,'Inactivo','Gratuidad','Union Libre');
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 400;
+
+select "VarCedulaAspirantes","VarIdentificadorUsuario","VarNombresAspirantes", "VarApellidosAspirantes", "VarCorreoAspirantes", "VarGeneroAspirantes", "NbrTelefonoAspirantes", "DtFechaNacimientoAspirantes", "NbrEdadAspirantes", "VarEstadoAspirantes", "VarEstadoGratuidadAspirantes", "VarEstadoCivilAspirantes" from "TblAspirantes"
+where "VarCedulaAspirantes" = '445006338' ;
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectAspirantes"("CedulaAspirante" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarCedulaAspirantes","VarIdentificadorUsuario","VarNombresAspirantes", "VarApellidosAspirantes", "VarCorreoAspirantes", "VarGeneroAspirantes", "NbrTelefonoAspirantes", "DtFechaNacimientoAspirantes", "NbrEdadAspirantes", "VarEstadoAspirantes", "VarEstadoGratuidadAspirantes", "VarEstadoCivilAspirantes" from "TblAspirantes"
+	where "VarCedulaAspirantes" = "CedulaAspirante"
+	order by "VarCedulaAspirantes";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+
+
+Exec "SpSelectAspirantes"('445006338');
+-----------------------
+Update:
+No se podrán modificar los datos del estudiante a excepción de su estado gratuidad, dado que los demás datos se obtienen del registro civil.
+Delete:
+No es posible hacer una eliminación de los datos, porque podría llevar a tener problemas en el sistema, además que se necesita tener un historial de la tabla, para esto se maneja el estado de las instituciones educativas, el cual, si necesitamos eliminar un registro de las instituciones educativas, lo pondríamos en estado inactivo con la ayuda del update.
+
+--Tabla Examen Aspirante
+-----------------------
+--Insert
+CREATE OR REPLACE PROCEDURE "SpInsertExamenAspirante"("IdUsuario" in varchar2, "CedulaAspirante" in varchar2, "IdExamen" in varchar2) 
+AS
+Begin
+	insert into "TblExamenAspirante"("VarIdentificadorUsuario","VarCedulaAspirantes","VarIdentificadorExamen")
+	values("IdUsuario","CedulaAspirante", "IdExamen");
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+Exec "SpInsertExamenAspirante"('a69bade4-74f4-11ed-8c78-0242ac1c000c','445006337','8c271e44-74f4-11ed-9ddf-0242ac1c000c');
+--Mostrar la tabla con el nuevo dato
+set serveroutput on
+SET LINESIZE 400;
+
+select "VarIdentificadorUsuario","VarCedulaAspirantes","VarIdentificadorExamen" FROM "TblExamenAspirante"
+where "VarIdentificadorUsuario" = 'a69bade4-74f4-11ed-8c78-0242ac1c000c' ;
+
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectExamenAspirante"("IdUsuario" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorUsuario","VarCedulaAspirantes","VarIdentificadorExamen" FROM "TblExamenAspirante"
+	where "VarIdentificadorUsuario" = "IdUsuario"
+	order by "VarIdentificadorUsuario";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+
+
+Exec "SpSelectExamenAspirante"('a69bade4-74f4-11ed-8c78-0242ac1c000c');
+-----------------------
+Update:
+No se podrán modificar los datos dado que se obtienen por parte de la Senescyt.
+Delete:
+No es posible hacer una eliminación de los datos, porque podría llevar a tener problemas en el sistema, además que se necesita tener un historial de la tabla, para esto se maneja el estado de las instituciones educativas, el cual, si necesitamos eliminar un registro de las instituciones educativas, lo pondríamos en estado inactivo con la ayuda del update.
+
+--Tabla Sedes
+-----------------------
+--select
+create or replace PROCEDURE "SpSelectSedes"("IdSedes" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	select "VarIdentificadorSedes", "VarIdentificadorParroquia", "VarIdentificadorCanton", "VarIdentificadorProvincia", "VarIdentificadorInstitucionEducativa", "VarNombreSedes", "VarDescripcionSedes", "NbrTelefonoSedes", "VarEstadoSedes"
+	FROM "TblSedes"
+	where "VarIdentificadorSedes" = "IdSedes"
+	order by "VarIdentificadorSedes";
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+--Corrida del procedimiento
+set serveroutput on
+SET LINESIZE 300;
+
+
+Exec "SpSelectSedes"('19043022-74f5-11ed-b0b8-0242ac1c000c');
+-----------------------
+Update:
+No se podrán modificar los datos dado que se obtienen por parte de instituciones educativas, o reportadas por la Senescyt.
+Delete:
+No es posible hacer una eliminación de los datos, porque podría llevar a tener problemas en el sistema, además que se necesita tener un historial de la tabla, para esto se maneja el estado de las instituciones educativas, el cual, si necesitamos eliminar un registro de las instituciones educativas, lo pondríamos en estado inactivo con la ayuda del update.
+
+
+-------------------------
+--Query 1
+--Realizar una consulta donde se muestre los aspirantes de género mastulino, que rindieron el examen  y esten en estado activo además la consulta debe mostrar:
+-- Cedula del aspirante
+-- Nombres y apellidos del aspirante
+-- Estado del examen del aspirante 
+-- Genero del aspirante
+-- Nota que obtuvo el aspirante
+-- Fecha del examen
+-- Notas que sean solo mayor a 875 en su nota del examen
+-------------------------
+create or replace PROCEDURE "PrAspiranteExamen"("CedulaAspirantes" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	SELECT asp."VarCedulaAspirantes" AS "CedulaAspirantes", asp."VarNombresAspirantes" AS "NombresAspirantes", asp."VarApellidosAspirantes" AS "ApellidosAspirantes", exa."VarEstadoExamen" AS "EstadoExamen", asp."VarGeneroAspirantes" AS "GeneroAspirantes", exa."VarNotaExamen" AS "NotaExamen", exa."DtFechaExamen" AS "FechaExamen" FROM "TblExamenAspirante" exas
+INNER JOIN "TblAspirantes" asp ON asp."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+INNER JOIN "TblExamen" exa ON exa."VarIdentificadorExamen" = exas."VarIdentificadorExamen"
+WHERE asp."VarGeneroAspirantes" LIKE 'M' AND exa."VarEstadoExamen" LIKE 'Activo' and asp."VarCedulaAspirantes"="CedulaAspirantes"
+GROUP BY asp."VarCedulaAspirantes",asp."VarNombresAspirantes", asp."VarApellidosAspirantes", exa."VarEstadoExamen", asp."VarGeneroAspirantes", exa."VarNotaExamen", exa."DtFechaExamen"
+HAVING exa."VarNotaExamen">=875;
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+set serveroutput on
+Exec "PrAspiranteExamen"(1979525964);
+
+-------------------------
+--Query 2
+--Desarrollar una consulta donde se muestre el numero de aspirantes que ingrese el usuario donde estos aspirantes hayan tenido las mayores notas para la postulación en carreras de licenciatura, además la consulta debe mostrar: 
+
+-- Cedula del aspirante
+-- Nombres de los aspirantes
+-- Apellidos de los aspirantes
+-- Número de teléfono del aspirante
+-- Nota del examen en forma descendente
+-- Nombre de la carrera
+-- Modalidad de la carrera
+-- Jornada de la carrera
+-------------------------
+
+create or replace PROCEDURE "PrAspiranteLicenciatura"("NumPersonas" in number)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	SELECT asp."VarCedulaAspirantes" AS "CedulaAspirantes", asp."VarNombresAspirantes" AS "NombresAspirantes", asp."VarApellidosAspirantes" AS "ApellidosAspirantes", asp."NbrTelefonoAspirantes" AS "NumeroTelefonoAspirantes", exa."VarNotaExamen" AS "NotaExamen", car."VarNombreCarreras" AS "NombreCarrera", car."VarModalidadCarreras" AS "ModalidadCarrera", car."VarJornadaCarreras" AS "JornadaCarrera" FROM "TblExamenAspirante" exas
+INNER JOIN "TblAspirantes" asp ON asp."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+INNER JOIN "TblExamen" exa ON exa."VarIdentificadorExamen" = exas."VarIdentificadorExamen"
+INNER JOIN "TblPostular" post ON post."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+INNER JOIN "TblCarreras" car ON car."VarIdentificadorCarreras" = post."VarIdentificadorCarreras"
+WHERE car."VarNombreCarreras" LIKE 'Licenciatura%'
+GROUP BY car."VarIdentificadorCarreras",asp."VarCedulaAspirantes", asp."VarNombresAspirantes", asp."VarApellidosAspirantes", asp."NbrTelefonoAspirantes", exa."VarNotaExamen", car."VarNombreCarreras", car."VarModalidadCarreras", car."VarJornadaCarreras"
+ORDER BY exa."VarNotaExamen" DESC
+FETCH FIRST "NumPersonas" ROWS ONLY;
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+set serveroutput on
+Exec "PrAspiranteLicenciatura"(10);
+
+-------------------------
+--Query 3
+--Encontrar las parroquias Activas en las que las sedes de las instituciones educativas acumulen más de 4 carreras en todo su territorio, además se debe mostrar:
+-- Identificador de la Parroquia
+-- Nombre de la Parroquia
+-- Número de carreras por parroquia
+-- Estado de la Parroquia
+-------------------------
+
+create or replace PROCEDURE "PrParroquiaCarreras"("IdParroquia" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	SELECT par."VarIdentificadorParroquia" AS "IdParroquia",par."VarNombreParroquia" AS "NombreParroquia", COUNT(car."VarIdentificadorCarreras") AS "NumeroCarreras", par."VarEstadoParroquia" AS "EstadoParroquia" FROM "TblCarrerasSedes" carse
+INNER JOIN "TblCarreras" car ON car."VarIdentificadorCarreras" = carse."VarIdentificadorCarreras"
+INNER JOIN "TblSedes" se ON se."VarIdentificadorSedes" = carse."VarIdentificadorSedes"
+INNER JOIN "TblParroquia" par ON par."VarIdentificadorParroquia" = se."VarIdentificadorParroquia"
+WHERE par."VarEstadoParroquia" LIKE 'Activo' and par."VarIdentificadorParroquia"="IdParroquia"
+GROUP BY par."VarIdentificadorParroquia",par."VarNombreParroquia",par."VarEstadoParroquia"
+HAVING COUNT(car."VarIdentificadorCarreras") >=4;
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+set serveroutput on
+Exec "PrParroquiaCarreras"('359d3254-74f7-11ed-a487-0242ac1c000c');
+
+-------------------------
+--Query 4
+--Listar los aspirantes que han rendido un examen que se encuentre en estado "activo" para el ingreso a la educación superior, y tienen puntajes mayor o igual a 975, dado que aquellos aspirantes que tengan un puntaje dentro de este rango serán premiados con una beca para estudiar, además debe mostrar:
+-- Cedula del aspirante
+-- Nombre del aspirante
+-- Apellido del aspirante
+-- Genero del aspirante
+-- Correo del aspirante
+-- Numero de telefono del aspirante
+-- Nota del aspirante mayor o igual a 975 en forma descendente
+-- Estado del examen
+-- Mensaje de BECADO
+-------------------------
+
+create or replace PROCEDURE "PrAspiranteGar"("CedulaAspirante" in varchar2)
+AS
+c1 SYS_REFCURSOR;
+Begin
+    open c1 for
+	SELECT asp."VarCedulaAspirantes" AS "CedulaAspirante", asp."VarNombresAspirantes" AS "NombresAspirante", asp."VarApellidosAspirantes" AS "ApellidosAspirante", asp."VarCorreoAspirantes" AS "CorreoAspirante", asp."VarGeneroAspirantes" AS "GeneroAspirante", asp."NbrTelefonoAspirantes" AS "TelefonoAspirante", exa."VarNotaExamen" AS "NotaExamen", exa."VarEstadoExamen" AS "EstadoExamen",('BECADO') AS "Mensaje" FROM "TblExamenAspirante" exas
+INNER JOIN "TblAspirantes" asp ON asp."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+INNER JOIN "TblExamen" exa ON exa."VarIdentificadorExamen" = exas."VarIdentificadorExamen"
+WHERE exa."VarNotaExamen" >= 975 AND exa."VarEstadoExamen" = 'Activo' and asp."VarCedulaAspirantes"= "CedulaAspirante"
+ORDER BY exa."VarNotaExamen" DESC;
+    DBMS_SQL.RETURN_RESULT(c1);
+End;
+/
+set serveroutput on
+Exec "PrAspiranteGar"(1788479684);
+
+-----------
+--Funciones
+-----------
+
+-------------------------
+--Query 1
+--Realizar una consulta donde se muestre los aspirantes de género masculino, que rindieron el examen y esten en estado activo además la consulta debe mostrar:
+-- Cedula del aspirante
+-- Nombres y apellidos del aspirante
+-- Estado del examen del aspirante 
+-- Genero del aspirante
+-- Nota que obtuvo el aspirante
+-- Fecha del examen
+-- Notas que sean solo mayor a 875 en su nota del examen
+-------------------------
+CREATE OR REPLACE FUNCTION "FnAspiranteExamen"("CedulaAspirantes" IN varchar2)
+RETURN SYS_REFCURSOR
+IS
+resumen SYS_REFCURSOR;
+BEGIN
+OPEN resumen FOR
+  SELECT asp."VarCedulaAspirantes" AS "CedulaAspirantes", asp."VarNombresAspirantes" AS "NombresAspirantes", asp."VarApellidosAspirantes" AS "ApellidosAspirantes", exa."VarEstadoExamen" AS "EstadoExamen", asp."VarGeneroAspirantes" AS "GeneroAspirantes", exa."VarNotaExamen" AS "NotaExamen", exa."DtFechaExamen" AS "FechaExamen" FROM "TblExamenAspirante" exas
+INNER JOIN "TblAspirantes" asp ON asp."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+INNER JOIN "TblExamen" exa ON exa."VarIdentificadorExamen" = exas."VarIdentificadorExamen"
+WHERE asp."VarGeneroAspirantes" LIKE 'M' AND exa."VarEstadoExamen" LIKE 'Activo' and asp."VarCedulaAspirantes"="CedulaAspirantes"
+GROUP BY asp."VarCedulaAspirantes",asp."VarNombresAspirantes", asp."VarApellidosAspirantes", exa."VarEstadoExamen", asp."VarGeneroAspirantes", exa."VarNotaExamen", exa."DtFechaExamen"
+HAVING exa."VarNotaExamen">=875;
+  RETURN resumen;
+END;
+/
+
+--Llamada e impresion de la funcion
+set serveroutput on
+DECLARE
+resumen2 SYS_REFCURSOR;
+"VarCedulaAspirantes" varchar2(50);
+"VarNombresAspirantes" varchar2(50);
+"VarApellidosAspirantes" varchar2(50);
+"VarEstadoExamen" varchar2(50);
+"VarGeneroAspirantes" varchar2(50);
+"VarNotaExamen" varchar2(50);
+"DtFechaExamen" date;
+BEGIN
+  resumen2 := "FnAspiranteExamen"(1979525964);
+  FETCH resumen2 INTO "VarCedulaAspirantes", "VarNombresAspirantes", "VarApellidosAspirantes","VarEstadoExamen","VarGeneroAspirantes","VarNotaExamen","DtFechaExamen";
+  CLOSE resumen2;
+  
+DBMS_OUTPUT.PUT_LINE('La cédula del aspirante es: ' || "VarCedulaAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los nombres del aspirante es: ' || "VarNombresAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los apellidos del aspirante es: ' || "VarApellidosAspirantes");
+DBMS_OUTPUT.PUT_LINE('El estado del examen es: ' || "VarEstadoExamen");
+DBMS_OUTPUT.PUT_LINE('El género del aspirante es: ' || "VarGeneroAspirantes");
+DBMS_OUTPUT.PUT_LINE('La nota del examen es: ' || "VarNotaExamen");
+DBMS_OUTPUT.PUT_LINE('La fecha que realizo el examen es: ' || "DtFechaExamen");
+END;
+/
+
+-------------------------
+--Query 2
+--Desarrollar una consulta donde se muestre a los 50 primeros aspirantes que hayan tenido las mayores notas para la postulación en carreras de licenciatura, además la consulta debe mostrar: 
+
+-- Cedula del aspirante
+-- Nombres de los aspirantes
+-- Apellidos de los aspirantes
+-- Número de teléfono del aspirante
+-- Nota del examen en forma descendente
+-- Nombre de la carrera
+-- Modalidad de la carrera
+-- Jornada de la carrera
+------------------------
+CREATE OR REPLACE FUNCTION "FnAspiranteLicenciatura"("CedulaAspirantes" in varchar2)
+RETURN SYS_REFCURSOR
+IS
+resumen SYS_REFCURSOR;
+BEGIN
+OPEN resumen FOR
+ SELECT asp."VarCedulaAspirantes" AS "CedulaAspirantes", asp."VarNombresAspirantes" AS "NombresAspirantes", asp."VarApellidosAspirantes" AS "ApellidosAspirantes", asp."NbrTelefonoAspirantes" AS "NumeroTelefonoAspirantes", exa."VarNotaExamen" AS "NotaExamen", car."VarNombreCarreras" AS "NombreCarrera", car."VarModalidadCarreras" AS "ModalidadCarrera", car."VarJornadaCarreras" AS "JornadaCarrera" FROM "TblExamenAspirante" exas
+INNER JOIN "TblAspirantes" asp ON asp."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+INNER JOIN "TblExamen" exa ON exa."VarIdentificadorExamen" = exas."VarIdentificadorExamen"
+INNER JOIN "TblPostular" post ON post."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+INNER JOIN "TblCarreras" car ON car."VarIdentificadorCarreras" = post."VarIdentificadorCarreras"
+WHERE car."VarNombreCarreras" LIKE 'Licenciatura%' and asp."VarCedulaAspirantes"="CedulaAspirantes"
+GROUP BY car."VarIdentificadorCarreras",asp."VarCedulaAspirantes", asp."VarNombresAspirantes", asp."VarApellidosAspirantes", asp."NbrTelefonoAspirantes", exa."VarNotaExamen", car."VarNombreCarreras", car."VarModalidadCarreras", car."VarJornadaCarreras"
+ORDER BY exa."VarNotaExamen" DESC
+FETCH FIRST 50 ROWS ONLY;
+  RETURN resumen;
+END;
+/
+
+--Llamada e impresion de la funcion
+set serveroutput on
+DECLARE
+resumen2 SYS_REFCURSOR;
+"VarCedulaAspirantes" varchar2(50);
+"VarNombresAspirantes" varchar2(50);
+"VarApellidosAspirantes" varchar2(50);
+"NbrTelefonoAspirantes" number;
+"VarNotaExamen" varchar2(50);
+"VarNombreCarreras" varchar2(50);
+"VarModalidadCarreras" varchar2(50);
+"VarJornadaCarreras" varchar2(50);
+BEGIN
+  resumen2 := "FnAspiranteLicenciatura"(506825665);
+  FETCH resumen2 INTO "VarCedulaAspirantes", "VarNombresAspirantes", "VarApellidosAspirantes","NbrTelefonoAspirantes","VarNotaExamen","VarNombreCarreras","VarModalidadCarreras","VarJornadaCarreras";
+  CLOSE resumen2;
+  
+DBMS_OUTPUT.PUT_LINE('La cédula del aspirante es: ' || "VarCedulaAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los nombres del aspirante es: ' || "VarNombresAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los apellidos del aspirante es: ' || "VarApellidosAspirantes");
+DBMS_OUTPUT.PUT_LINE('El telefono del aspirante es: ' || "NbrTelefonoAspirantes");
+DBMS_OUTPUT.PUT_LINE('La nota del examen es: ' || "VarNotaExamen");
+DBMS_OUTPUT.PUT_LINE('El nombre de la carrera es: ' || "VarNombreCarreras");
+DBMS_OUTPUT.PUT_LINE('La modalidad de la carrera es: ' || "VarModalidadCarreras");
+DBMS_OUTPUT.PUT_LINE('La jornada de la carrera es: ' || "VarJornadaCarreras");
+END;
+/
+
+-------------------------
+--Query 3
+--Encontrar las parroquias Activas en las que las sedes de las instituciones educativas acumulen más de 4 carreras en todo su territorio, además se debe mostrar:
+-- Identificador de la Parroquia
+-- Nombre de la Parroquia
+-- Número de carreras por parroquia
+-- Estado de la Parroquia
+-------------------------
+CREATE OR REPLACE FUNCTION "FnParroquiaCarreras"("IdParroquia" in varchar2)
+RETURN SYS_REFCURSOR
+IS
+resumen SYS_REFCURSOR;
+BEGIN
+OPEN resumen FOR
+ SELECT par."VarIdentificadorParroquia" AS "IdParroquia",par."VarNombreParroquia" AS "NombreParroquia", COUNT(car."VarIdentificadorCarreras") AS "NumeroCarreras", par."VarEstadoParroquia" AS "EstadoParroquia" FROM "TblCarrerasSedes" carse
+INNER JOIN "TblCarreras" car ON car."VarIdentificadorCarreras" = carse."VarIdentificadorCarreras"
+INNER JOIN "TblSedes" se ON se."VarIdentificadorSedes" = carse."VarIdentificadorSedes"
+INNER JOIN "TblParroquia" par ON par."VarIdentificadorParroquia" = se."VarIdentificadorParroquia"
+WHERE par."VarEstadoParroquia" LIKE 'Activo' and par."VarIdentificadorParroquia"="IdParroquia"
+GROUP BY par."VarIdentificadorParroquia",par."VarNombreParroquia",par."VarEstadoParroquia"
+HAVING COUNT(car."VarIdentificadorCarreras") >=4;
+  RETURN resumen;
+END;
+/
+
+--Llamada e impresion de la funcion
+set serveroutput on
+DECLARE
+resumen2 SYS_REFCURSOR;
+"VarIdentificadorParroquia" varchar2(50);
+"VarNombreParroquia" varchar2(50);
+"NumeroCarreras" varchar2(50);
+"VarEstadoParroquia" varchar2(50);
+BEGIN
+  resumen2 := "FnParroquiaCarreras"('359d3254-74f7-11ed-a487-0242ac1c000c');
+  FETCH resumen2 INTO "VarIdentificadorParroquia", "VarNombreParroquia", "NumeroCarreras","VarEstadoParroquia";
+  CLOSE resumen2;
+  
+DBMS_OUTPUT.PUT_LINE('El identificador de la parroquia es: ' || "VarIdentificadorParroquia");
+DBMS_OUTPUT.PUT_LINE('El nombre de la parroquia es: ' || "VarNombreParroquia");
+DBMS_OUTPUT.PUT_LINE('El numero de carreras en esa parroquia es: ' || "NumeroCarreras");
+DBMS_OUTPUT.PUT_LINE('Esa parroquia se encuentra actualmente en estado: ' || "VarEstadoParroquia");
+END;
+/
+
+-------------------------
+--Query 4
+--Listar los aspirantes que han rendido un examen que se encuentre en estado "activo" para el ingreso a la educación superior, y tienen puntajes mayor o igual a 975, dado que aquellos aspirantes que tengan un puntaje dentro de este rango serán premiados con una beca para estudiar, además debe mostrar:
+-- Cedula del aspirante
+-- Nombre del aspirante
+-- Apellido del aspirante
+-- Genero del aspirante
+-- Correo del aspirante
+-- Numero de telefono del aspirante
+-- Nota del aspirante mayor o igual a 975 en forma descendente
+-- Estado del examen
+-- Mensaje de BECADO
+-------------------------
+CREATE OR REPLACE FUNCTION "FnAspiranteGar"("CedulaAspirantes" in varchar2)
+RETURN SYS_REFCURSOR
+IS
+resumen SYS_REFCURSOR;
+BEGIN
+OPEN resumen FOR
+ SELECT asp."VarCedulaAspirantes" AS "CedulaAspirante", asp."VarNombresAspirantes" AS "NombresAspirante", asp."VarApellidosAspirantes" AS "ApellidosAspirante", asp."VarCorreoAspirantes" AS "CorreoAspirante", asp."VarGeneroAspirantes" AS "GeneroAspirante", asp."NbrTelefonoAspirantes" AS "TelefonoAspirante", exa."VarNotaExamen" AS "NotaExamen", exa."VarEstadoExamen" AS "EstadoExamen",('BECADO') AS "Mensaje" FROM "TblExamenAspirante" exas
+INNER JOIN "TblAspirantes" asp ON asp."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+INNER JOIN "TblExamen" exa ON exa."VarIdentificadorExamen" = exas."VarIdentificadorExamen"
+WHERE exa."VarNotaExamen" >= 975 AND exa."VarEstadoExamen" = 'Activo' and asp."VarCedulaAspirantes"= "CedulaAspirantes"
+ORDER BY exa."VarNotaExamen" DESC;
+  RETURN resumen;
+END;
+/
+
+--Llamada e impresion de la funcion
+set serveroutput on
+DECLARE
+resumen2 SYS_REFCURSOR;
+"VarCedulaAspirantes" varchar2(50);
+"VarNombresAspirantes" varchar2(50);
+"VarApellidosAspirantes" varchar2(50);
+"VarCorreoAspirantes" varchar2(50);
+"VarGeneroAspirantes" varchar2(50);
+"NbrTelefonoAspirantes" number;
+"VarNotaExamen" varchar2(50);
+"VarEstadoExamen" varchar2(50);
+"Mensaje" varchar2(50);
+BEGIN
+  resumen2 := "FnAspiranteGar"(1788479684);
+  FETCH resumen2 INTO "VarCedulaAspirantes", "VarNombresAspirantes", "VarApellidosAspirantes","VarCorreoAspirantes","VarGeneroAspirantes","NbrTelefonoAspirantes","VarNotaExamen","VarEstadoExamen","Mensaje";
+  CLOSE resumen2;
+  
+DBMS_OUTPUT.PUT_LINE('La cédula del aspirante es: ' || "VarCedulaAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los nombres del aspirante es: ' || "VarNombresAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los apellidos del aspirante es: ' || "VarApellidosAspirantes");
+DBMS_OUTPUT.PUT_LINE('El correo del aspirante es: ' || "VarCorreoAspirantes");
+DBMS_OUTPUT.PUT_LINE('El genero del aspirante es: ' || "VarGeneroAspirantes");
+DBMS_OUTPUT.PUT_LINE('El telefono del aspirante es: ' || "NbrTelefonoAspirantes");
+DBMS_OUTPUT.PUT_LINE('La nota del examen es: ' || "VarNotaExamen");
+DBMS_OUTPUT.PUT_LINE('El estado actual de examen es: ' || "VarEstadoExamen");
+DBMS_OUTPUT.PUT_LINE('Por su excelente nota usted a sido ' || "Mensaje");
+END;
+/
+
+-------------------------
+--Query 5
+--Desarrollar una consulta donde se muestre el usuario que gestiono al aspirante con el rol de administración, además se debe mostrar:
+-- Cedula del aspirante
+-- Nombres del aspirante
+-- Apellidos del aspirante
+-- Genero del aspirante 
+-- Edades de 20 a 25 años en forma ascendente del aspirante
+-- Nombres del usuario
+-- Apellidos del usuario
+-- Tipo de rol del usuario
+-------------------------
+
+CREATE OR REPLACE FUNCTION "FnAspiranteUsuario"
+RETURN SYS_REFCURSOR
+IS
+resumen SYS_REFCURSOR;
+BEGIN
+OPEN resumen FOR
+  SELECT asp."VarCedulaAspirantes" AS "CedulaAspirante", asp."VarNombresAspirantes" AS "NombresAspirante", asp."VarApellidosAspirantes" AS "ApellidosAspirante", asp."VarGeneroAspirantes" AS "GeneroAspirante", asp."NbrEdadAspirantes" AS "EdadAspirante", us."VarNombresUsuario" AS "NombresUsuario", us."VarApellidosUsuario" AS "ApellidosUsuario", rol."VarTipoRol" AS "TipoRol" FROM "TblAspirantes" asp
+INNER JOIN "TblUsuario" us ON us."VarIdentificadorUsuario" = asp."VarIdentificadorUsuario"
+INNER JOIN "TblUsuarioRolPermisos" usrolper ON usrolper."VarIdentificadorUsuario" = us."VarIdentificadorUsuario"
+INNER JOIN "TblRolPermisos" rolper ON rolper."VarIdentificadorRol" = usrolper."VarIdentificadorRol"
+INNER JOIN "TblRol" rol ON rol."VarIdentificadorRol" = rolper."VarIdentificadorRol" 
+WHERE rol."VarTipoRol" LIKE 'Administrador/a' AND asp."NbrEdadAspirantes" BETWEEN 20 and 25
+GROUP BY asp."VarCedulaAspirantes",asp."VarNombresAspirantes", asp."VarApellidosAspirantes", asp."VarGeneroAspirantes", asp."NbrEdadAspirantes", us."VarNombresUsuario", us."VarApellidosUsuario", rol."VarTipoRol"
+ORDER BY asp."NbrEdadAspirantes" ASC;
+  RETURN resumen;
+END;
+/
+-------------------------
+--Llamada e impresion de la funcion
+set serveroutput on
+DECLARE
+resumen2 SYS_REFCURSOR;
+"VarCedulaAspirantes" varchar2(50);
+"VarNombresAspirantes" varchar2(50);
+"VarApellidosAspirantes" varchar2(50);
+"VarGeneroAspirantes" varchar2(50);
+"NbrEdadAspirantes" number;
+"VarNombresUsuario" varchar2(50);
+"VarApellidosUsuario" varchar2(50);
+"VarTipoRol" varchar2(50);
+
+
+BEGIN
+  resumen2 := "FnAspiranteUsuario"();
+  FETCH resumen2 INTO "VarCedulaAspirantes", "VarNombresAspirantes", "VarApellidosAspirantes","VarGeneroAspirantes","NbrEdadAspirantes","VarNombresUsuario","VarApellidosUsuario","VarTipoRol";
+  CLOSE resumen2;
+  
+DBMS_OUTPUT.PUT_LINE('La cédula del aspirante es: ' || "VarCedulaAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los nombres del aspirante es: ' || "VarNombresAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los apellidos del aspirante es: ' || "VarApellidosAspirantes");
+DBMS_OUTPUT.PUT_LINE('El genero del aspirante es: ' || "VarGeneroAspirantes");
+DBMS_OUTPUT.PUT_LINE('La edad del aspirante es: ' || "NbrEdadAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los nombres del usuario son: ' || "VarNombresUsuario");
+DBMS_OUTPUT.PUT_LINE('ELos apellidos del usuario son: ' || "VarApellidosUsuario");
+DBMS_OUTPUT.PUT_LINE('El tipo de rol es: ' || "VarTipoRol");
+END;
+/
+-------------------------
+--Query 6
+-- Mostrar una lista de aspirantes que tengan las mejores posibilidades de obtener más puntaje extra en su examen de postulación
+-- Cedula del aspirante
+-- Nombres del aspirante
+-- Apellidos del aspirante
+-- Correo electrónico del aspirante
+-- Genero del aspirante  
+-- Todos los puntos de acciones afirmativas para puntaje extra en su nota de postulación
+
+-------------------------
+
+CREATE OR REPLACE FUNCTION "FnAspiranteAcciones"
+RETURN SYS_REFCURSOR
+IS
+resumen SYS_REFCURSOR;
+BEGIN
+OPEN resumen FOR
+  SELECT asp."VarCedulaAspirantes" AS "CedulaAspirante", asp."VarNombresAspirantes" AS "NombresAspirante", asp."VarApellidosAspirantes" AS "ApellidosAspirante", asp."VarCorreoAspirantes" AS "CorreoAspirantes",asp."VarGeneroAspirantes" AS "GeneroAspirante", para."VarAccionAfirSocioecoParametros" AS "AccionAfirSocioecoParametros", para."VarAccionAfirTerriParametros" AS "AccionAfirTerriParametros", para."VarAccionAfirRuralParametros" AS "AccionAfirRuralParametros", para."VarAccionAfirVulneraParametros" AS "AccionAfirVulneraParametros", para."VarAccionAfirPueblosNacionParametros" AS "AccionAfirPueblosNacionParametros" FROM "TblPostularParametros" pospa
+INNER JOIN "TblParametros" para ON para."VarIdentificadorParametros" = pospa."VarIdentificadorParametros"
+INNER JOIN "TblPostular" pos ON pos."VarIdentificadorPostular" = pospa."VarIdentificadorPostular"
+INNER JOIN "TblExamenAspirante" exas ON exas."VarCedulaAspirantes" = pos."VarCedulaAspirantes"
+INNER JOIN "TblAspirantes" asp ON asp."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+WHERE para."VarAccionAfirSocioecoParametros" LIKE 'Verdadero' AND para."VarAccionAfirTerriParametros" LIKE 'Verdadero' AND para."VarAccionAfirRuralParametros" LIKE 'Verdadero' AND para."VarAccionAfirVulneraParametros" LIKE '6' AND para."VarAccionAfirPueblosNacionParametros" LIKE 'Verdadero';
+  RETURN resumen;
+END;
+/
+
+
+--Llamada e impresion de la funcion
+set serveroutput on
+DECLARE
+resumen2 SYS_REFCURSOR;
+"VarCedulaAspirantes" varchar2(50);
+"VarNombresAspirantes" varchar2(50);
+"VarApellidosAspirantes" varchar2(50);
+"VarCorreoAspirantes" varchar2(50);
+"VarGeneroAspirantes" varchar2(50);
+"VarAccionAfirSocioecoParametros" varchar2(50);
+"VarAccionAfirTerriParametros" varchar2(50);
+"VarAccionAfirRuralParametros" varchar2(50);
+"VarAccionAfirVulneraParametros" varchar2(50);
+"VarAccionAfirPueblosNacionParametros" varchar2(50);
+
+
+BEGIN
+  resumen2 := "FnAspiranteAcciones"();
+  FETCH resumen2 INTO "VarCedulaAspirantes", "VarNombresAspirantes", "VarApellidosAspirantes","VarCorreoAspirantes","VarGeneroAspirantes","VarAccionAfirSocioecoParametros","VarAccionAfirTerriParametros","VarAccionAfirRuralParametros","VarAccionAfirVulneraParametros","VarAccionAfirPueblosNacionParametros";
+  CLOSE resumen2;
+  
+DBMS_OUTPUT.PUT_LINE('La cédula del aspirante es: ' || "VarCedulaAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los nombres del aspirante es: ' || "VarNombresAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los apellidos del aspirante es: ' || "VarApellidosAspirantes");
+DBMS_OUTPUT.PUT_LINE('El correo del aspirante es: ' || "VarCorreoAspirantes");
+DBMS_OUTPUT.PUT_LINE('El género del aspirante es: ' || "VarGeneroAspirantes");
+DBMS_OUTPUT.PUT_LINE('El valor de punto de acción afirmativa socioeconómica es: ' || "VarAccionAfirSocioecoParametros");
+DBMS_OUTPUT.PUT_LINE('El valor de punto de acción afirmativa territorial es: ' || "VarAccionAfirTerriParametros");
+DBMS_OUTPUT.PUT_LINE('El valor de punto de acción afirmativa ruralidad es: ' || "VarAccionAfirRuralParametros");
+DBMS_OUTPUT.PUT_LINE('El valor de punto de acción afirmativa vulnerabilidad es: ' || "VarAccionAfirVulneraParametros");
+DBMS_OUTPUT.PUT_LINE('El valor de punto de acción afirmativa pueblos-nacionalidades es: ' || "VarAccionAfirPueblosNacionParametros");
+END;
+/
+
+-------------------------
+--Query 7
+-- Enlistar los aspirantes activos que tienen un puntaje mayor o igual al puntaje referencial ofrecido cada año por las carreras de las universidades activas y sus -- distintos cupos en caso de tener al menos uno, además se debe mostrar:
+-- Cedula del aspirante
+-- Nombres del aspirante
+-- Apellidos del aspirante
+-- Nombre de carrera que postulo
+-- Nota de Postulacion del aspirante
+-- Puntaje referencial de la carrera
+-- Numero de cupos de la carrera
+-- Jornada de la carrera
+-- Modalidad de la carrera
+-- Estado del aspirante
+-- Estado de la carrera
+-- Mensaje de 'Posible asignacion de cupo'
+-------------------------
+
+
+CREATE OR REPLACE FUNCTION "FnAspiranteCarreras"
+RETURN SYS_REFCURSOR
+IS
+resumen SYS_REFCURSOR;
+BEGIN
+OPEN resumen FOR
+  SELECT asp."VarCedulaAspirantes" AS "CedulaAspirante", asp."VarNombresAspirantes" AS "NombresAspirante", asp."VarApellidosAspirantes" AS "ApellidosAspirante",car."VarNombreCarreras" AS "NombreCarrera", pos."VarPuntajePostular" AS "PuntajePostular", para."VarNotaReferCarParametros" AS "NotaReferencialCarreras", para."VarCuposOfertaCarParametros" AS "CuposOfertadosCarreras", car."VarJornadaCarreras" AS "JornadaCarreras", car."VarModalidadCarreras" AS "ModalidadCarreras", asp."VarEstadoAspirantes" AS "EstadoAspirante", car."VarEstadoCarreras" AS "EstadoCarreras" FROM "TblPostularParametros" pospa
+INNER JOIN "TblParametros" para ON para."VarIdentificadorParametros" = pospa."VarIdentificadorParametros"
+INNER JOIN "TblPostular" pos ON pos."VarIdentificadorPostular" = pospa."VarIdentificadorPostular"
+INNER JOIN "TblExamenAspirante" exas ON exas."VarCedulaAspirantes" = pos."VarCedulaAspirantes"
+INNER JOIN "TblAspirantes" asp ON asp."VarCedulaAspirantes" = exas."VarCedulaAspirantes"
+INNER JOIN "TblCarreras" car ON car."VarIdentificadorCarreras" = pos."VarIdentificadorCarreras"
+WHERE pos."VarPuntajePostular" >= para."VarNotaReferCarParametros" AND para."VarCuposOfertaCarParametros" >= 1 AND asp."VarEstadoAspirantes" LIKE 'Activo' AND car."VarEstadoCarreras" LIKE 'Activo'
+GROUP BY asp."VarCedulaAspirantes", asp."VarNombresAspirantes", asp."VarApellidosAspirantes",car."VarNombreCarreras", pos."VarPuntajePostular", para."VarNotaReferCarParametros", para."VarCuposOfertaCarParametros", car."VarJornadaCarreras", car."VarModalidadCarreras", asp."VarEstadoAspirantes", car."VarEstadoCarreras";
+  RETURN resumen;
+END;
+/
+
+--Llamada e impresion de la funcion
+set serveroutput on
+DECLARE
+resumen2 SYS_REFCURSOR;
+"VarCedulaAspirantes" varchar2(50);
+"VarNombresAspirantes" varchar2(50);
+"VarApellidosAspirantes" varchar2(50);
+"VarNombreCarreras" varchar2(50);
+"VarPuntajePostular" varchar(50);
+"VarNotaReferCarParametros" varchar2(50);
+"VarCuposOfertaCarParametros" varchar2(50);
+"VarJornadaCarreras" varchar2(50);
+"VarModalidadCarreras" varchar2(50);
+"VarEstadoAspirantes" varchar2(50);
+"VarEstadoCarreras" varchar2(50);
+
+
+BEGIN
+  resumen2 := "FnAspiranteCarreras"();
+  FETCH resumen2 INTO "VarCedulaAspirantes", "VarNombresAspirantes", "VarApellidosAspirantes","VarNombreCarreras","VarPuntajePostular","VarNotaReferCarParametros","VarCuposOfertaCarParametros","VarJornadaCarreras","VarModalidadCarreras","VarEstadoAspirantes","VarEstadoCarreras";
+  CLOSE resumen2;
+  
+DBMS_OUTPUT.PUT_LINE('La cédula del aspirante es: ' || "VarCedulaAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los nombres del aspirante es: ' || "VarNombresAspirantes");
+DBMS_OUTPUT.PUT_LINE('Los apellidos del aspirante es: ' || "VarApellidosAspirantes");
+DBMS_OUTPUT.PUT_LINE('El nombre carrera es: ' || "VarNombreCarreras");
+DBMS_OUTPUT.PUT_LINE('El puntaje de postulación: ' || "VarPuntajePostular");
+DBMS_OUTPUT.PUT_LINE('La nota referencial es: ' || "VarNotaReferCarParametros");
+DBMS_OUTPUT.PUT_LINE('Los cupos ofertados son: ' || "VarCuposOfertaCarParametros");
+DBMS_OUTPUT.PUT_LINE('La jornada es: ' || "VarJornadaCarreras");
+DBMS_OUTPUT.PUT_LINE('La modalidad es: ' || "VarModalidadCarreras");
+DBMS_OUTPUT.PUT_LINE('El estado del aspirante es: ' || "VarEstadoAspirantes");
+DBMS_OUTPUT.PUT_LINE('El estado de la carrera es: ' || "VarEstadoCarreras");
+END;
+/
+
+-------------------------
+--Query 8
+-- Los aspirantes necesitan saber la ubicacion de su institución educativa de educacion superior junto a su carrera de postulacion para su conocimiento, se propone -- realizar una consulta para la solucionar esta problematica, además debe mostrar:
+-- Nombre de la carrera
+-- Nombre de la sede de la carrera
+-- Nombre de la institucion educativa
+-- Nombre de la parroquia
+-- Nombre del canton
+-- Nombre de la provincia
+-- Nota: Todas las entidades involucradas deben estar en estado activo para ser tomada en la visualización de la lista
+
+-------------------------
+
+CREATE OR REPLACE FUNCTION "FnAspiranteCanton"
+RETURN SYS_REFCURSOR
+IS
+resumen SYS_REFCURSOR;
+BEGIN
+OPEN resumen FOR
+  SELECT car."VarNombreCarreras" AS "NombreCarreras", se."VarNombreSedes" AS "NombreSede", ie."VarNombreInstitucionEducativa" AS "NombreInstitucionEducativa", par."VarNombreParroquia" AS "NombreParroquia", can."VarNombreCanton" AS "NombreCanton", pro."VarNombreProvincia" AS "NombreProvincia" FROM "TblCarrerasSedes" carrese
+INNER JOIN "TblSedes" se ON se."VarIdentificadorSedes" = carrese."VarIdentificadorSedes"
+INNER JOIN "TblInstitucionEducativa" ie ON ie."VarIdentificadorInstitucionEducativa" = se."VarIdentificadorInstitucionEducativa"
+INNER JOIN "TblParroquia" par ON par."VarIdentificadorParroquia" = se."VarIdentificadorParroquia"
+INNER JOIN "TblCanton" can ON can."VarIdentificadorCanton" = par."VarIdentificadorCanton"
+INNER JOIN "TblProvincia" pro ON pro."VarIdentificadorProvincia" = can."VarIdentificadorProvincia"
+INNER JOIN "TblCarreras" car ON car."VarIdentificadorCarreras" = carrese."VarIdentificadorCarreras"
+WHERE car."VarEstadoCarreras" LIKE 'Activo' AND ie."VarEstadoInstitucionEducativa" LIKE 'Activo' AND se."VarEstadoSedes" LIKE 'Activo' AND par."VarEstadoParroquia" LIKE 'Activo' AND can."VarEstadoCanton" LIKE 'Activo' AND pro."VarEstadoProvincia" LIKE 'Activo';
+  RETURN resumen;
+END;
+/
+
+
+--Llamada e impresion de la funcion
+set serveroutput on
+DECLARE
+resumen2 SYS_REFCURSOR;
+"VarNombreCarreras" varchar2(50);
+"VarNombreSedes" varchar2(50);
+"VarNombreInstitucionEducativa" varchar2(50);
+"VarNombreParroquia" varchar2(50);
+"VarNombreCanton" varchar2(50);
+"VarNombreProvincia" varchar(50);
+
+BEGIN
+  resumen2 := "FnAspiranteCanton"();
+  FETCH resumen2 INTO "VarNombreCarreras","VarNombreSedes","VarNombreInstitucionEducativa","VarNombreParroquia","VarNombreCanton","VarNombreProvincia";
+  CLOSE resumen2;
+  
+DBMS_OUTPUT.PUT_LINE('El nombre de la carrera es: ' || "VarNombreCarreras");
+DBMS_OUTPUT.PUT_LINE('El nombre de la sede es: ' || "VarNombreSedes");
+DBMS_OUTPUT.PUT_LINE('El nombre de la institucion educativa es: ' || "VarNombreInstitucionEducativa");
+DBMS_OUTPUT.PUT_LINE('El nombre de la parroquia es: ' || "VarNombreParroquia");
+DBMS_OUTPUT.PUT_LINE('El pnombre del canton es: ' || "VarNombreCanton");
+DBMS_OUTPUT.PUT_LINE('El nombre de la provincia es: ' || "VarNombreProvincia");
+
+END;
+/
